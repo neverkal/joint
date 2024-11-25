@@ -1,0 +1,8 @@
+[versions]
+lombokVersion = "8.4"
+spotlessVersion = "6.23.3"
+
+[libraries]
+lombok = { module = "io.freefair.lombok:io.freefair.lombok.gradle.plugin", version.ref = "lombokVersion" }
+spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotlessVersion" }
+
