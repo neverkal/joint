@@ -14,8 +14,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.todayant.joint.common.constant.ColumnConstant;
 import org.hibernate.annotations.Comment;
+
+import com.todayant.joint.common.constant.ColumnConstant;
 
 @FieldNameConstants
 @MappedSuperclass
