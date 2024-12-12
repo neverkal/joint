@@ -1,0 +1,22 @@
+[versions]
+springBootVersion = "3.3.5"
+dependencyManagementPlugin = "1.1.6"
+springCloudVersion = "2023.0.0"
+
+awsSpringVersion = "3.1.0"
+springdocVersion = "2.1.0"
+queryDslVersion = "5.1.0"
+
+[libraries]
+springCloudBom = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "springCloudVersion" }
+awsSpringBom = { group = "io.awspring.cloud", name ="spring-cloud-aws-dependencies", version.ref = "awsSpringVersion" }
+springdoc = { group="org.springdoc", name="springdoc-openapi-starter-webmvc-ui", version.ref="springdocVersion" }
+queryDslJpa = { group = "com.querydsl", name = "querydsl-jpa", version.ref = "queryDslVersion"}
+queryDslApt = { group = "com.querydsl", name = "querydsl-apt", version.ref = "queryDslVersion"}
+
+
+[bundles]
+
+[plugins]
+boot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
+dependency = { id = "io.spring.dependency-management", version.ref = "dependencyManagementPlugin" }

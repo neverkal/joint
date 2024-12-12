@@ -1,2 +1,18 @@
+[libraries]
+awssdkBom = { group = "software.amazon.awssdk", name = "bom", version = "2.26.26" }
+okhttp3Bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version = "5.0.0-alpha.14" }
+testcontainersBom = { group = "org.testcontainers", name = "testcontainers-bom", version = "1.20.1" }
+testcontainersJunitRedis = { group = "com.redis.testcontainers", name = "testcontainers-redis-junit", version = "1.6.4" }
+restAssured = { group = "io.rest-assured", name = "rest-assured", version = "5.5.0" }
+mockitoInline = { group = "org.mockito", name = "mockito-inline", version = "5.2.0" }
+awaitility = { group = "org.awaitility", name = "awaitility", version = "4.2.2" }
+jakartaPersistence = { group = "jakarta.persistence", name = "jakarta.persistence-api" }
+jakartaAnnotation = { group = "jakarta.annotation", name = "jakarta.annotation-api" }
+apache-commons-text = { group = "org.apache.commons", name = "commons-text", version = "1.12.0" }
+datadog-trace = { group = "com.datadoghq", name = "dd-trace-api", version = "1.37.1" }
+
+[bundles]
+jakarataAnnotationProcessor = [ "jakartaPersistence", "jakartaAnnotation"]
+
 [plugins]
 javaConvention = { id="joint.java-conventions" }

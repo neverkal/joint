@@ -1,3 +1,11 @@
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("spring") {
+            from(files("gradle/spring.versions.toml"))
+        }
+    }
+}
+
 pluginManagement {
     repositories {
         mavenCentral()
