@@ -1,0 +1,36 @@
+spring:
+  config:
+    import:
+      - classpath:config/application-database.yaml
+logging:
+  level:
+    root: INFO
+    com.todayant: TRACE
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(%-4relative) --- [ %thread{10} ] %cyan(%logger{40}:%L) : %msg%n'
+---
+spring:
+  config:
+    activate:
+      on-profile: h2-db
+  datasource:
+    enabled-replication: true
+    read-write:
+      hikari:
+        jdbc-url: jdbc:h2:mem:${random.uuid}
+        username: sa
+        password: password
+        driver-class-name: org.h2.Driver
+        pool-name: 'read-write-pool'
+        maximumPoolSize: 20
+        minimumIdle: 20
+    read-only:
+      hikari:
+        jdbc-url: ${spring.datasource.read-write.hikari.jdbc-url}
+        username: ${spring.datasource.read-write.hikari.username}
+        password: ${spring.datasource.read-write.hikari.password}
+        driver-class-name: ${spring.datasource.read-write.hikari.driver-class-name}
+        pool-name: 'read-only-pool'
+        read-only: true
+        maximumPoolSize: 20
+        minimumIdle: 20

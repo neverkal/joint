@@ -24,7 +24,7 @@ import com.todayant.joint.common.jpa.AbstractBaseEntity;
 @FieldNameConstants
 @Getter
 @ToString(callSuper = true)
-@Table(name = "product")
+@Table(name = "products")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product extends AbstractBaseEntity {
 

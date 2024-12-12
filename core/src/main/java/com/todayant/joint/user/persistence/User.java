@@ -1,5 +1,8 @@
 package com.todayant.joint.user.persistence;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -22,9 +26,9 @@ import com.todayant.joint.common.jpa.AbstractBaseEntity;
 @FieldNameConstants
 @Getter
 @ToString(callSuper = true)
-@Table(name = "user")
+@Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends AbstractBaseEntity {
+public class User extends AbstractBaseEntity implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,4 +54,13 @@ public class User extends AbstractBaseEntity {
   @Column(name = ColumnConstant.USER_ADDRESS)
   @Comment(value = "주소")
   private String address;
+
+  @Builder
+  public User(String nickName, String email, String password, String phoneNumber, String address) {
+    this.nickName = Objects.requireNonNull(nickName);
+    this.email = Objects.requireNonNull(email);
+    this.password = Objects.requireNonNull(password);
+    this.phoneNumber = Objects.requireNonNull(phoneNumber);
+    this.address = address;
+  }
 }

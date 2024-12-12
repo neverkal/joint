@@ -1,0 +1,26 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        timezone:
+          default_storage: NORMALIZE
+        jdbc:
+          time_zone: Asia/Seoul
+---
+spring:
+  config:
+    activate:
+      on-profile: database-logging
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    org.springframework.transaction: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    org.hibernate.orm.jdbc: TRACE
+    com.zaxxer.hikari: TRACE
+    com.zaxxer.hikari.HikariConfig: DEBUG

@@ -30,7 +30,7 @@ import com.todayant.joint.user.persistence.User;
 @FieldNameConstants
 @Getter
 @ToString(callSuper = true)
-@Table(name = "order")
+@Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order extends AbstractBaseEntity {
 

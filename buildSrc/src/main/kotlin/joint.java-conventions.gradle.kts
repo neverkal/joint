@@ -9,6 +9,9 @@ version = "0.0.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21)) // Java 21로 설정
+    }
 }
 
 tasks.test { useJUnitPlatform() }
@@ -41,6 +44,10 @@ sourceSets { main { java { srcDirs(arrayOf("$projectDir/src/main/java", generate
 tasks.compileJava { options.generatedSourceOutputDirectory.set(file(generated)) }
 
 tasks.clean { delete(file(generated)) }
+
+tasks.withType<JavaCompile> {
+    options.release.set(21) // 컴파일 옵션에 Java 21 명시
+}
 
 spotless {
     val excludeFiles = arrayOf(".idea/**/*.*", ".vscode/**/*.*", ".github/**/*.*", "build/**/*.*")
