@@ -1,6 +1,7 @@
 package com.todayant.joint.purchase.persistence;
 
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -51,6 +53,18 @@ public class Participation extends AbstractBaseEntity {
   private Integer participationQuantity;
 
   @Column(name = ColumnConstant.PARTICIPATION_DATE, nullable = false)
-  @Comment("참여일자")
+  @Comment("참여 일자")
   private ZonedDateTime participationDate;
+
+  @Builder
+  public Participation(
+      User user,
+      Purchase groupPurchase,
+      Integer participationQuantity,
+      ZonedDateTime participationDate) {
+    this.user = Objects.requireNonNull(user);
+    this.groupPurchase = Objects.requireNonNull(groupPurchase);
+    this.participationQuantity = Objects.requireNonNull(participationQuantity);
+    this.participationDate = Objects.requireNonNull(participationDate);
+  }
 }

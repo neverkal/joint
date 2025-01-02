@@ -1,7 +1,7 @@
 package com.todayant.joint.order.persistence;
 
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -50,7 +51,7 @@ public class Order extends AbstractBaseEntity {
 
   @Column(name = ColumnConstant.TOTAL_AMOUNT, nullable = false)
   @Comment("총 금액")
-  private BigDecimal totalAmount;
+  private int totalAmount;
 
   @Enumerated(EnumType.STRING)
   @Column(name = ColumnConstant.ORDER_STATUS, nullable = false)
@@ -62,5 +63,13 @@ public class Order extends AbstractBaseEntity {
     PAID,
     SHIPPING,
     COMPLETED
+  }
+
+  @Builder
+  public Order(User user, ZonedDateTime orderDate, int totalAmount) {
+    this.user = Objects.requireNonNull(user);
+    this.orderDate = Objects.requireNonNull(orderDate);
+    this.totalAmount = totalAmount;
+    this.status = OrderStatus.PAYMENT_PENDING;
   }
 }

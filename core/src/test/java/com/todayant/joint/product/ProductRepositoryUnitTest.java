@@ -1,5 +1,6 @@
-package com.todayant.joint.user.persistence;
+package com.todayant.joint.product;
 
+import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.todayant.joint.JpaRepositoryTest;
+import com.todayant.joint.product.persistence.Product;
+import com.todayant.joint.product.persistence.ProductRepository;
 
 import static java.time.ZoneOffset.UTC;
 import static org.mockito.BDDMockito.given;
@@ -21,9 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @Slf4j
 @JpaRepositoryTest
-public class UserRepositoryUnitTest {
+public class ProductRepositoryUnitTest {
 
-  @Autowired private UserRepository repository;
+  @Autowired private ProductRepository repository;
   @MockBean private DateTimeProvider dateTimeProvider;
 
   @BeforeEach
@@ -33,19 +36,20 @@ public class UserRepositoryUnitTest {
 
   @Test
   void saveSuccess() {
-    User user = assertDoesNotThrow(this::save);
+    Product product = assertDoesNotThrow(this::save);
   }
 
-  private User save() {
-    User user =
-        User.builder()
-            .nickName("nick-name")
-            .email("test@gmail.com")
-            .password("1234")
-            .phoneNumber("01012341234")
-            .address("서울시 광진구")
+  private Product save() {
+    Product product =
+        Product.builder()
+            .name("product1")
+            .description("description")
+            .category(Product.Category.KIT)
+            .basePrice(3000)
+            .imageUrl(URI.create("https://localhost"))
+            .stockQuantity(100)
             .build();
 
-    return repository.save(user);
+    return repository.save(product);
   }
 }

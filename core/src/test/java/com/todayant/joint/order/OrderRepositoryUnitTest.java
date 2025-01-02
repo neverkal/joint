@@ -1,4 +1,4 @@
-package com.todayant.joint.user.persistence;
+package com.todayant.joint.order;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
@@ -13,6 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.todayant.joint.JpaRepositoryTest;
+import com.todayant.joint.order.persistence.Order;
+import com.todayant.joint.order.persistence.OrderRepository;
+import com.todayant.joint.user.persistence.User;
+import com.todayant.joint.user.persistence.UserRepository;
 
 import static java.time.ZoneOffset.UTC;
 import static org.mockito.BDDMockito.given;
@@ -21,9 +25,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @Slf4j
 @JpaRepositoryTest
-public class UserRepositoryUnitTest {
+public class OrderRepositoryUnitTest {
 
-  @Autowired private UserRepository repository;
+  @Autowired private OrderRepository repository;
+  @Autowired private UserRepository userRepository;
   @MockBean private DateTimeProvider dateTimeProvider;
 
   @BeforeEach
@@ -33,10 +38,19 @@ public class UserRepositoryUnitTest {
 
   @Test
   void saveSuccess() {
-    User user = assertDoesNotThrow(this::save);
+    Order order = assertDoesNotThrow(this::save);
   }
 
-  private User save() {
+  private Order save() {
+    User user = createUser();
+
+    Order order =
+        Order.builder().user(user).orderDate(ZonedDateTime.now(UTC)).totalAmount(1000).build();
+
+    return repository.save(order);
+  }
+
+  private User createUser() {
     User user =
         User.builder()
             .nickName("nick-name")
@@ -46,6 +60,6 @@ public class UserRepositoryUnitTest {
             .address("서울시 광진구")
             .build();
 
-    return repository.save(user);
+    return userRepository.save(user);
   }
 }

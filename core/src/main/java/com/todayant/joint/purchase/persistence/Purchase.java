@@ -1,7 +1,7 @@
 package com.todayant.joint.purchase.persistence;
 
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -67,11 +68,29 @@ public class Purchase extends AbstractBaseEntity {
 
   @Comment(value = "할인 가격")
   @Column(name = ColumnConstant.DISCOUNT_PRICE, nullable = false)
-  private BigDecimal discountPrice;
-}
+  private Integer discountPrice;
 
-enum GroupPurchaseStatus {
-  IN_PROGRESS,
-  COMPLETED,
-  CANCELLED
+  public enum GroupPurchaseStatus {
+    IN_PROGRESS,
+    COMPLETED,
+    CANCELLED
+  }
+
+  @Builder
+  public Purchase(
+      Product product,
+      Integer targetQuantity,
+      Integer currentQuantity,
+      ZonedDateTime startDate,
+      ZonedDateTime endDate,
+      GroupPurchaseStatus status,
+      Integer discountPrice) {
+    this.product = Objects.requireNonNull(product);
+    this.targetQuantity = Objects.requireNonNull(targetQuantity);
+    this.currentQuantity = Objects.requireNonNull(currentQuantity);
+    this.startDate = Objects.requireNonNull(startDate);
+    this.endDate = Objects.requireNonNull(endDate);
+    this.status = status;
+    this.discountPrice = Objects.requireNonNull(discountPrice);
+  }
 }

@@ -1,6 +1,7 @@
 package com.todayant.joint.order.persistence;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +16,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -65,5 +67,13 @@ public class OrderItem extends AbstractBaseEntity {
   @PreUpdate
   private void calculateSubtotal() {
     this.subtotal = this.unitPrice.multiply(BigDecimal.valueOf(this.quantity));
+  }
+
+  @Builder
+  public OrderItem(Order order, Product product, Integer quantity, BigDecimal unitPrice) {
+    this.order = Objects.requireNonNull(order);
+    this.product = Objects.requireNonNull(product);
+    this.quantity = Objects.requireNonNull(quantity);
+    this.unitPrice = Objects.requireNonNull(unitPrice);
   }
 }
