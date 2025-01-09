@@ -15,8 +15,7 @@ import org.testcontainers.utility.DockerImageName;
 @Slf4j
 @TestConfiguration(proxyBeanMethods = false)
 public class TestContainerConfiguration {
-  // todo: 이미지 주소 변경 필요
-  private static final String REDIS_IMAGE = "public.ecr.aws/yogiyo/redis:6.2.7";
+  private static final String REDIS_IMAGE = "redis:6.2.7";
   private static final int REDIS_PORT = 6379;
 
   @Bean

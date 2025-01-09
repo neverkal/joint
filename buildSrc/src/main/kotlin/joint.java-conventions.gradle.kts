@@ -3,6 +3,7 @@ plugins {
     id("java-library")
     id("com.diffplug.spotless")
     id("io.freefair.lombok")
+    id("jacoco")
 }
 
 version = "0.0.0"
@@ -103,4 +104,24 @@ repositories {
     mavenCentral()
     maven("https://repo.spring.io/milestone")
     maven("https://repo.spring.io/snapshot")
+}
+
+/*
+전체 test 디버깅떄 사용
+tasks.test {
+  testLogging {
+    showStandardStreams = true
+    showCauses = true
+    showExceptions = true
+    showStackTraces = true
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+  }
+}*/
+
+tasks.jacocoTestReport {
+    reports {
+        html.required.set(true)
+        xml.required.set(true)
+        csv.required.set(false)
+    }
 }
